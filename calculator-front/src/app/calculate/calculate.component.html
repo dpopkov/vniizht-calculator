@@ -1,0 +1,16 @@
+<div>
+  <form #challengeForm="ngForm">
+    <label>
+      Введите выражение:
+      <input type="text"
+             [(ngModel)]="formCalculate.expression" name="expression" #guessField="ngModel">
+    </label>
+    <br>
+    <button type="button" (click)="onSubmit()">
+      Вычислить
+    </button>
+  </form>
+  <div>
+    <span>{{ message }}</span>
+  </div>
+</div>
