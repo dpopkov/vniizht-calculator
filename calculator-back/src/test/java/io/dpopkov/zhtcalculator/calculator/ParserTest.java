@@ -50,6 +50,13 @@ class ParserTest {
         assertNull(parser.nextToken());
     }
 
+    @Test
+    void whenParsingSuffixedFunctionName_thenThrowException() {
+        Parser parser = new Parser("sinkhole(30)");
+        CalculatorException ex = assertThrows(CalculatorException.class, parser::nextToken);
+        assertEquals("Unknown function: sinkhole", ex.getMessage());
+    }
+
     private void assertToken(Token token, String expectedValue, TokenType expectedType) {
         assertNotNull(token);
         assertEquals(expectedValue, token.getValue());

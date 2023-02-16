@@ -83,10 +83,21 @@ public class Parser {
         String hasFound() {
             for (String name : names) {
                 if (input.startsWith(name, currentPosition)) {
+                    validateName(name);
                     return name;
                 }
             }
             return null;
+        }
+
+        private void validateName(String name) {
+            int end = currentPosition + name.length();
+            while (end < input.length() && Character.isAlphabetic(input.charAt(end))) {
+                end++;
+            }
+            if (end > currentPosition + name.length()) {
+                throw new CalculatorException("Unknown function: " + input.substring(currentPosition, end));
+            }
         }
     }
 }
