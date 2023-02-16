@@ -5,6 +5,8 @@ import java.util.Scanner;
 
 public class InfixCalculator {
 
+    private static final BracketChecker bracketChecker = new BracketChecker();
+
     /**
      * Вычисляет выражение содержащее арифметические операции в инфиксной нотации.
      * Операнды должны быть представлены числами, где в качестве разделителя между
@@ -14,6 +16,9 @@ public class InfixCalculator {
      * @return результат вычисления
      */
     public static double calculate(String input) {
+        if (!bracketChecker.check(input)) {
+            throw new CalculatorException("Non-balanced brackets");
+        }
         Deque<Token> postfix = new InfixTranslator().toPostfix(input);
         return PostfixCalculator.calculate(postfix);
     }
